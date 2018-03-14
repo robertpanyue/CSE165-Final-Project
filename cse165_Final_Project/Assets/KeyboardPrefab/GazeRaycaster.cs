@@ -18,7 +18,6 @@ public class GazeRaycaster : MonoBehaviour {
         RaycastHit hit;
         
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        Debug.Log(KeyText.GetComponent<Text>().text);
         nameText.text = KeyText.GetComponent<Text>().text;
 
         if (Physics.Raycast(transform.position, fwd, out hit)) {
