@@ -10,8 +10,8 @@ public class movement : MonoBehaviour {
     public GameObject rightHand;
     public GameObject head;
     private float verticalVelocity;
-    private float gravity = 30.0f;
-    private float jumpForce = 12.0f;
+    private float gravity = 25.0f;
+    private float jumpForce = 17.5f;
     private Vector3 preHandPosition;
     private Vector3 releaseHandPosition;
     private float xdiff = 0f;
@@ -19,6 +19,9 @@ public class movement : MonoBehaviour {
     private int count = 1;
     private bool spawn =true;
     private Vector3 headforward;
+    private bool jump = false;
+    public GameObject RightHand;
+
     // Use this for initialization
     void Start() {
         controller = GetComponent<CharacterController>();
@@ -29,6 +32,7 @@ public class movement : MonoBehaviour {
     void Update() {
         if (controller.isGrounded)
         {
+
             if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger) || OVRInput.GetDown(OVRInput.RawButton.LHandTrigger))
             {
                 preHandPosition = new Vector3(Mathf.Min(leftHand.transform.position.x, rightHand.transform.position.x), Mathf.Min(leftHand.transform.position.y, rightHand.transform.position.y), Mathf.Min(leftHand.transform.position.z, rightHand.transform.position.z));
@@ -40,13 +44,14 @@ public class movement : MonoBehaviour {
         }
         else
         {
+
             verticalVelocity -= gravity * Time.deltaTime;
             
         }
 
-        Debug.Log(spawn);
+ 
 
-        if (OVRInput.GetUp(OVRInput.RawButton.RHandTrigger) || OVRInput.GetUp(OVRInput.RawButton.LHandTrigger))
+        if ((OVRInput.GetUp(OVRInput.RawButton.RHandTrigger) || OVRInput.GetUp(OVRInput.RawButton.LHandTrigger)) )
         {
             verticalVelocity = jumpForce;
             //calculate the diff
@@ -70,13 +75,14 @@ public class movement : MonoBehaviour {
 
         if (count <=1 && spawn && controller.isGrounded)
         {
+            Debug.Log("+++++++++++++++++++++++++++++++++++++");
             SpawnBlock();
             spawn = false;
         }
 
         count++;
 
- 
+    
     }
 
 
@@ -84,24 +90,30 @@ public class movement : MonoBehaviour {
     {
         int index = Random.Range(0, blockList.Count-1);
         int dir = Random.Range(0, 3);
-        float dist = Random.Range(5f, 20.0f);
+        float dist = Random.Range(5f, 10.0f);
         switch (dir)
         {
             case 0:
-                Instantiate(blockList[index], new Vector3 (transform.position.x + dist, transform.position.y-15f, transform.position.z), Quaternion.identity);
+                Instantiate(blockList[index], new Vector3 (transform.position.x + dist, 74f, transform.position.z), Quaternion.identity);
                 break;
             case 1:
-                Instantiate(blockList[index], new Vector3(transform.position.x - dist, transform.position.y-15f, transform.position.z), Quaternion.identity);
+                Instantiate(blockList[index], new Vector3(transform.position.x - dist, 74f, transform.position.z), Quaternion.identity);
                 break;
             case 2:
-                Instantiate(blockList[index], new Vector3(transform.position.x , transform.position.y-15f, transform.position.z + dist), Quaternion.identity);
+                Instantiate(blockList[index], new Vector3(transform.position.x , 74f, transform.position.z + dist), Quaternion.identity);
                 break;
             case 3:
-                Instantiate(blockList[index], new Vector3(transform.position.x, transform.position.y-15f, transform.position.z - dist), Quaternion.identity);
+                Instantiate(blockList[index], new Vector3(transform.position.x, 74f, transform.position.z - dist), Quaternion.identity);
                 break;
         }
         
     }
+
+
+
+
+
+
 }
 
 
