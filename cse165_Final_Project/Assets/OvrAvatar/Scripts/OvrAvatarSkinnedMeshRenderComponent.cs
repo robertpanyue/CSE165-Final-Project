@@ -46,6 +46,13 @@ public class OvrAvatarSkinnedMeshRenderComponent : OvrAvatarRenderComponent
                 if (!transform.name.EndsWith("0"))
                 {
                     CapsuleCollider collider = transform.gameObject.AddComponent<CapsuleCollider>();
+                    Rigidbody rigidbody = transform.gameObject.AddComponent<Rigidbody>();
+                    rigidbody.useGravity = false;
+                    rigidbody.isKinematic = true;
+                    
+
+                    this.tag = "rightHand";
+
                     if (!transform.name.EndsWith("1"))
                     {
                         collider.radius = Phalanges.Radius;
@@ -64,8 +71,13 @@ public class OvrAvatarSkinnedMeshRenderComponent : OvrAvatarRenderComponent
             }
             else if (transform.name.Contains("grip"))
             {
+                
                 SphereCollider collider = transform.gameObject.AddComponent<SphereCollider>();
-                collider.radius = 0.04f;
+                Rigidbody rigidbody = transform.gameObject.AddComponent<Rigidbody>();
+                rigidbody.useGravity = false;
+                rigidbody.isKinematic = true;
+                collider.isTrigger = true;
+                collider.radius = 0.03f;
                 collider.center = new Vector3(
                     ((transform.name.Contains("_l_")) ? -1 : 1) * 0.01f,
                     0.01f, 0.02f);

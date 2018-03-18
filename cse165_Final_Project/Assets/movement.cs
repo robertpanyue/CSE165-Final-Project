@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class movement : MonoBehaviour {
 
@@ -10,8 +11,8 @@ public class movement : MonoBehaviour {
     public GameObject rightHand;
     public GameObject head;
     private float verticalVelocity;
-    private float gravity = 25.0f;
-    private float jumpForce = 17.5f;
+    private float gravity = 50.0f;
+    private float jumpForce = 19.5f;
     private Vector3 preHandPosition;
     private Vector3 releaseHandPosition;
     private float xdiff = 0f;
@@ -20,7 +21,12 @@ public class movement : MonoBehaviour {
     private bool spawn =true;
     private Vector3 headforward;
     private bool jump = false;
-    public GameObject RightHand;
+
+    //score
+    private int score;
+    public GameObject scorePanel1;
+    private GameObject nextBlock;
+    private GameObject currBlock;
 
     // Use this for initialization
     void Start() {
@@ -75,13 +81,16 @@ public class movement : MonoBehaviour {
 
         if (count <=1 && spawn && controller.isGrounded)
         {
-            Debug.Log("+++++++++++++++++++++++++++++++++++++");
+            
             SpawnBlock();
             spawn = false;
         }
 
         count++;
 
+
+        //handmenu
+        
     
     }
 
@@ -89,21 +98,30 @@ public class movement : MonoBehaviour {
     void SpawnBlock()
     {
         int index = Random.Range(0, blockList.Count-1);
-        int dir = Random.Range(0, 3);
-        float dist = Random.Range(5f, 10.0f);
+        int dir = Random.Range(2,2);
+        float dist = Random.Range(10f, 12.0f);
+
+        
         switch (dir)
         {
+            //right
             case 0:
-                Instantiate(blockList[index], new Vector3 (transform.position.x + dist, 74f, transform.position.z), Quaternion.identity);
+                GameObject nextBlock1 = Instantiate(blockList[index], new Vector3(transform.position.x +3.8f + dist, 71.7f, transform.position.z+3f), Quaternion.identity);
+                nextBlock1.transform.Rotate(0,180f,0);
                 break;
+            //left
             case 1:
-                Instantiate(blockList[index], new Vector3(transform.position.x - dist, 74f, transform.position.z), Quaternion.identity);
+                GameObject nextBlock2 = Instantiate(blockList[index], new Vector3(transform.position.x + 3.8f - dist, 71.7f, transform.position.z - 3f), Quaternion.identity);
                 break;
+            //forward
             case 2:
-                Instantiate(blockList[index], new Vector3(transform.position.x , 74f, transform.position.z + dist), Quaternion.identity);
+                GameObject nextBlock3 = Instantiate(blockList[index], new Vector3(transform.position.x - 2f, 71.7f, transform.position.z - 3f + dist), Quaternion.identity);
+                nextBlock3.transform.Rotate(0, 90f, 0);
                 break;
+            //back
             case 3:
-                Instantiate(blockList[index], new Vector3(transform.position.x, 74f, transform.position.z - dist), Quaternion.identity);
+                GameObject nextBlock4 = Instantiate(blockList[index], new Vector3(transform.position.x + 3.8f, 71.7f, transform.position.z - 3f - dist), Quaternion.identity);
+                nextBlock4.transform.Rotate(0, -90f, 0);
                 break;
         }
         
@@ -112,6 +130,16 @@ public class movement : MonoBehaviour {
 
 
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "startcube")
+        {
+            score += 10;
+            scorePanel1.GetComponent<Text>().text = score.ToString();
+            Debug.Log(score);
+
+        }
+    }
 
 
 }

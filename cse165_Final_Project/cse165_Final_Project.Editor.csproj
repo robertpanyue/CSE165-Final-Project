@@ -341,6 +341,12 @@
     <Compile Include="Assets\OVR\Editor\OVRScreenshotWizard.cs" />
     <Compile Include="Assets\OVR\Scripts\Editor\OVRManagerEditor.cs" />
     <Compile Include="Assets\OvrAvatar\Editor\AvatarMaterialEditor.cs" />
+    <Compile Include="Assets\Parabox Primitives\Editor\CustomEditors\ParaboxConeEditor.cs" />
+    <Compile Include="Assets\Parabox Primitives\Editor\CustomEditors\ParaboxCubeEditor.cs" />
+    <Compile Include="Assets\Parabox Primitives\Editor\CustomEditors\ParaboxCylinderEditor.cs" />
+    <Compile Include="Assets\Parabox Primitives\Editor\CustomEditors\ParaboxPlaneEditor.cs" />
+    <Compile Include="Assets\Parabox Primitives\Editor\CustomEditors\ParaboxPrismEditor.cs" />
+    <Compile Include="Assets\Parabox Primitives\Editor\InteractivePrimitiveEditor.cs" />
     <Compile Include="Assets\TinyTerrain\Editor\Density\Hill.cs" />
     <Compile Include="Assets\TinyTerrain\Editor\Density\InverseHill.cs" />
     <Compile Include="Assets\TinyTerrain\Editor\Density\Island.cs" />
@@ -373,6 +379,7 @@
     <None Include="Assets\OvrAvatar\Content\Materials\AvatarSurfaceShaderPBSV2.shader" />
     <None Include="Assets\OvrAvatar\Content\Materials\AvatarSurfaceShaderSelfOccluding.shader" />
     <None Include="Assets\OvrAvatar\Samples\SocialStarter\README.txt" />
+    <None Include="Assets\Parabox Primitives\README.txt" />
     <None Include="Assets\Simple UI\Fonts\OFL.txt" />
     <None Include="Assets\TinyTerrain\Materials\TerrainSurface.shader" />
     <None Include="Assets\TinyTerrain\README.txt" />

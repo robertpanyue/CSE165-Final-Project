@@ -326,6 +326,12 @@
   <ItemGroup>
     <Compile Include="Assets\Destory.cs" />
     <Compile Include="Assets\Hand.cs" />
+    <Compile Include="Assets\HandUIScript\BackButtonUI.cs" />
+    <Compile Include="Assets\HandUIScript\CloseHandMenu.cs" />
+    <Compile Include="Assets\HandUIScript\OpenHandUI.cs" />
+    <Compile Include="Assets\HandUIScript\QuitGameUI.cs" />
+    <Compile Include="Assets\HandUIScript\switchPanel.cs" />
+    <Compile Include="Assets\HandUIScript\switchPanel1.cs" />
     <Compile Include="Assets\KeyboardPrefab\GazeRaycaster.cs" />
     <Compile Include="Assets\KeyboardPrefab\KeyboardManager.cs" />
     <Compile Include="Assets\movement.cs" />
@@ -514,6 +520,14 @@
     <Compile Include="Assets\OvrAvatar\Scripts\OvrAvatarSkinnedMeshRenderPBSComponent.cs" />
     <Compile Include="Assets\OvrAvatar\Scripts\OvrAvatarSkinnedMeshRenderPBSV2Component.cs" />
     <Compile Include="Assets\OvrAvatar\Scripts\OvrAvatarTouchController.cs" />
+    <Compile Include="Assets\Parabox Primitives\Classes\InteractivePrimitive.cs" />
+    <Compile Include="Assets\Parabox Primitives\Classes\InteractivePrimitivesMath.cs" />
+    <Compile Include="Assets\Parabox Primitives\Enum\InteractivePrimitiveEnum.cs" />
+    <Compile Include="Assets\Parabox Primitives\MonoBehaviours\InteractiveCone.cs" />
+    <Compile Include="Assets\Parabox Primitives\MonoBehaviours\InteractiveCube.cs" />
+    <Compile Include="Assets\Parabox Primitives\MonoBehaviours\InteractiveCylinder.cs" />
+    <Compile Include="Assets\Parabox Primitives\MonoBehaviours\InteractivePlane.cs" />
+    <Compile Include="Assets\Parabox Primitives\MonoBehaviours\InteractivePrism.cs" />
     <Compile Include="Assets\Simple UI\Samples\IconPreview.cs" />
     <Compile Include="Assets\TinyTerrain\Scripts\Rotate.cs" />
     <Compile Include="Assets\TinyTerrain\Standard Assets\Water\Scripts\Displace.cs" />
@@ -547,6 +561,7 @@
     <None Include="Assets\OvrAvatar\Content\Materials\AvatarSurfaceShaderPBSV2.shader" />
     <None Include="Assets\OvrAvatar\Content\Materials\AvatarSurfaceShaderSelfOccluding.shader" />
     <None Include="Assets\OvrAvatar\Samples\SocialStarter\README.txt" />
+    <None Include="Assets\Parabox Primitives\README.txt" />
     <None Include="Assets\Simple UI\Fonts\OFL.txt" />
     <None Include="Assets\TinyTerrain\Materials\TerrainSurface.shader" />
     <None Include="Assets\TinyTerrain\README.txt" />
