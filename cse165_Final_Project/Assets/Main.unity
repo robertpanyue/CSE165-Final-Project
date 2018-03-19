@@ -5192,10 +5192,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockList:
   - {fileID: 1995815071361324, guid: e6ed788c20379934687d2035244dfebd, type: 2}
+  - {fileID: 1690874407459026, guid: 83b0b941e76f77341ba3e33e9200cdb3, type: 2}
+  - {fileID: 1520911203191672, guid: 7f400e221202dc9409b9f18f9b6787ce, type: 2}
+  - {fileID: 1379284568126690, guid: 9538f0576dd89b74e8dd2cf158965297, type: 2}
+  - {fileID: 1559309298628006, guid: 39476611374347c40bb0aa27a54a2d77, type: 2}
+  - {fileID: 1980550817404032, guid: 654317e0b8c10f746b763f7482e5db87, type: 2}
+  - {fileID: 1999888996605770, guid: f13533abc88cdab41ba530150ca12ffd, type: 2}
+  - {fileID: 1993163533901776, guid: 6d472f2f07aea504fbbf51270aa323bb, type: 2}
+  - {fileID: 1863896934627880, guid: 1030a06b45aa19446b8d38793c8223e9, type: 2}
   leftHand: {fileID: 348871698}
   rightHand: {fileID: 1228837098}
   head: {fileID: 706006795}
   scorePanel1: {fileID: 1336924555}
+  currBlock: {fileID: 0}
 --- !u!4 &1568247954 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: e6cb64ebc1109e546bb32a94bfe8e749, type: 3}
@@ -5212,7 +5221,7 @@ GameObject:
   - component: {fileID: 1586897900}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

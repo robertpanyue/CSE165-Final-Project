@@ -19,6 +19,7 @@ TagManager:
   - shop
   - table
   - startcube
+  - ground
   layers:
   - Default
   - TransparentFX
