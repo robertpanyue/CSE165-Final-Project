@@ -6,7 +6,7 @@ public class BackButtonUI : MonoBehaviour {
     public GameObject panel1;
     public GameObject panel2;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         panel1.SetActive(false);
         panel2.SetActive(true);

@@ -20,6 +20,9 @@ TagManager:
   - table
   - startcube
   - ground
+  - hand
+  - soda
+  - menu
   layers:
   - Default
   - TransparentFX

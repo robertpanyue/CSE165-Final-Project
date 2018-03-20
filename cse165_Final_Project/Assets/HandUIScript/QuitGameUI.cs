@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuitGameUI : MonoBehaviour {
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerExit(Collider other)
     {
         UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();

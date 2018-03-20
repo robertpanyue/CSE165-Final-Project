@@ -5,7 +5,7 @@ using UnityEngine;
 public class CloseHandMenu : MonoBehaviour {
     public GameObject Canvas;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerExit(Collider other)
     {
         Canvas.SetActive(false);    
     }

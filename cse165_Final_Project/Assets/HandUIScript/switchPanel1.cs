@@ -8,7 +8,7 @@ public class switchPanel1 : MonoBehaviour {
     public GameObject toolsPanel;
     public GameObject settingPanel;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerExit(Collider other)
     {
         mainPanel.SetActive(false);
         settingPanel.SetActive(true);
