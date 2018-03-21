@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 public class GazeRaycaster : MonoBehaviour {
@@ -14,6 +15,10 @@ public class GazeRaycaster : MonoBehaviour {
     public GameObject Gazepoint;
     public GameObject Keyboard;
 
+    private void Start()
+    {
+        GameObject.Find("player").GetComponent<movement>().enabled = false;
+    }
     void FixedUpdate() {
         RaycastHit hit;
         
@@ -72,10 +77,8 @@ public class GazeRaycaster : MonoBehaviour {
         if (target.GetComponent<Button>()) {
             target.GetComponent<Button>().onClick.Invoke();
         }
-        if (target.tag == "Start") { 
-            StartMenu.SetActive(false);
-            Gazepoint.SetActive(false);
-            Keyboard.SetActive(false);
+        if (target.tag == "Start") {
+            SceneManager.LoadScene("Game");
         }
 
         if (target.tag == "Quit")

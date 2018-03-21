@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class movement : MonoBehaviour
 {
+    public GameObject StartMenu;
+    public GameObject Gazepoint;
+    public GameObject Keyboard;
 
     public List<GameObject> blockList;
     private CharacterController controller;
@@ -33,21 +36,41 @@ public class movement : MonoBehaviour
     private int index = 0;
 
     //gameMode
+    public bool jumpMode;
+    public bool throwMode;
+    public bool gunMode;
+    public bool hookMode;
 
-
-
+    //shop
+    public GameObject shopMenu;
+    public GameObject mainMenu;
+    public GameObject handMenu;
     public GameObject grabber;
     // Use this for initialization
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        gameMode = true;
+        jumpMode = true;
+        throwMode = false;
+        gunMode = false;
+        hookMode = false;
+        score = int.Parse(scorePanel1.GetComponent<Text>().text);
+
+    }
+
+    public void setJumpMode(bool a)
+    {
+        jumpMode = a;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameMode)
+
+        
+
+        if (jumpMode)
         {
             if (controller.isGrounded)
             {
@@ -61,6 +84,20 @@ public class movement : MonoBehaviour
                 verticalVelocity = -gravity * Time.deltaTime;
                 xdiff = 0;
                 zdiff = 0;
+
+
+                if ((OVRInput.GetUp(OVRInput.RawButton.RHandTrigger) || OVRInput.GetUp(OVRInput.RawButton.LHandTrigger)))
+                {
+                    verticalVelocity = jumpForce;
+                    //calculate the diff
+                    releaseHandPosition = new Vector3(Mathf.Min(leftHand.transform.position.x, rightHand.transform.position.x), Mathf.Min(leftHand.transform.position.y, rightHand.transform.position.y), Mathf.Min(leftHand.transform.position.z, rightHand.transform.position.z));
+                    xdiff = Mathf.Abs(releaseHandPosition.x - preHandPosition.x);
+                    zdiff = Mathf.Abs(releaseHandPosition.z - preHandPosition.z);
+                    headforward = head.transform.forward;
+                    Debug.Log("Up");
+                    spawn = true;
+                    count = 1;
+                }
             }
             else
             {
@@ -70,19 +107,6 @@ public class movement : MonoBehaviour
             }
 
 
-
-            if ((OVRInput.GetUp(OVRInput.RawButton.RHandTrigger) || OVRInput.GetUp(OVRInput.RawButton.LHandTrigger)))
-            {
-                verticalVelocity = jumpForce;
-                //calculate the diff
-                releaseHandPosition = new Vector3(Mathf.Min(leftHand.transform.position.x, rightHand.transform.position.x), Mathf.Min(leftHand.transform.position.y, rightHand.transform.position.y), Mathf.Min(leftHand.transform.position.z, rightHand.transform.position.z));
-                xdiff = Mathf.Abs(releaseHandPosition.x - preHandPosition.x);
-                zdiff = Mathf.Abs(releaseHandPosition.z - preHandPosition.z);
-                headforward = head.transform.forward;
-                Debug.Log("Up");
-                spawn = true;
-                count = 1;
-            }
 
             //make the movement
             Vector3 moveVector = Vector3.zero;
@@ -127,9 +151,9 @@ public class movement : MonoBehaviour
     {
         
         int dir = Random.Range(0, 3);
-        float dist = Random.Range(8f, 10.0f);
+        float dist = Random.Range(9f, 10.5f);
 
-
+  
         switch (dir)
         {
             //right
@@ -182,16 +206,36 @@ public class movement : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
+
+        
+
+
         if (hit.transform.name != currBlock.transform.name)
         {
+            score = int.Parse(scorePanel1.GetComponent<Text>().text);
             score += 10;
             scorePanel1.GetComponent<Text>().text = score.ToString();
-            Debug.Log("++++++++++++++++++++++++++++++++++++++++++++++++++"+score);
-            Destroy(currBlock);
-            currBlock = nextBlock;
-            spawn = true;
-            count = 1;
+
+            if (currBlock != null)
+            {
+
+                Destroy(currBlock);
+                currBlock = nextBlock;
+                spawn = true;
+                count = 1;
+                
+            }
+
+
+            if (hit.transform.name == "shop(Clone)")
+            {
+                handMenu.SetActive(true);
+                mainMenu.SetActive(false);
+                shopMenu.SetActive(true);
+            }
+
         }
+
 
     }
 

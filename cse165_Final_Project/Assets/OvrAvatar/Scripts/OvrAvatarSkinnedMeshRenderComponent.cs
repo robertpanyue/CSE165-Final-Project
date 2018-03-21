@@ -37,36 +37,26 @@ public class OvrAvatarSkinnedMeshRenderComponent : OvrAvatarRenderComponent
             !transform.gameObject.GetComponent(typeof(SphereCollider)) &&
             transform.name.Contains("hands"))
         {
-            if (transform.name.Contains("thumb") ||
-                transform.name.Contains("index") ||
-                transform.name.Contains("middle") ||
-                transform.name.Contains("ring") ||
-                transform.name.Contains("pinky"))
+            if (transform.name.Contains("index"))
+             
             {
                 if (!transform.name.EndsWith("0"))
                 {
-                    CapsuleCollider collider = transform.gameObject.AddComponent<CapsuleCollider>();
-                    Rigidbody rigidbody = transform.gameObject.AddComponent<Rigidbody>();
-                    rigidbody.useGravity = false;
-                    rigidbody.isKinematic = true;
-                    
-
-                    this.tag = "rightHand";
+              
 
                     if (!transform.name.EndsWith("1"))
                     {
+                        CapsuleCollider collider = transform.gameObject.AddComponent<CapsuleCollider>();
+                        Rigidbody rigidbody = transform.gameObject.AddComponent<Rigidbody>();
+                        rigidbody.useGravity = false;
+                        rigidbody.isKinematic = true;
+                        this.tag = "rightHand";
                         collider.radius = Phalanges.Radius;
                         collider.height = Phalanges.Height;
                         collider.center = Phalanges.GetCenter(transform.name.Contains("_l_"));
                         collider.direction = 0;
                     }
-                    else
-                    {
-                        collider.radius = Metacarpals.Radius;
-                        collider.height = Metacarpals.Height;
-                        collider.center = Metacarpals.GetCenter(transform.name.Contains("_l_"));
-                        collider.direction = 0;
-                    }
+              
                 }
             }
             else if (transform.name.Contains("grip"))

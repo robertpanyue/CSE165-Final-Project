@@ -10,8 +10,10 @@ public class switchPanel1 : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        mainPanel.SetActive(false);
-        settingPanel.SetActive(true);
-
+        if (other.transform.gameObject.name == "hands:b_r_index2")
+        {
+            mainPanel.SetActive(false);
+            settingPanel.SetActive(true);
+        }
     }
 }

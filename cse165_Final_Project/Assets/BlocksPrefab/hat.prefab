@@ -379,7 +379,6 @@ GameObject:
   - component: {fileID: 4676395489223868}
   - component: {fileID: 65663340936716156}
   - component: {fileID: 65649377921276418}
-  - component: {fileID: 54545543430943466}
   - component: {fileID: 65044014117386580}
   m_Layer: 0
   m_Name: hat
@@ -1283,21 +1282,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1545712658895442}
   m_Mesh: {fileID: 4300008, guid: 7e7185de70a311a45b6191c925f27530, type: 3}
---- !u!54 &54545543430943466
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1993163533901776}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65044014117386580
 BoxCollider:
   m_ObjectHideFlags: 1

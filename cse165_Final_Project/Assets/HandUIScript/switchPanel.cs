@@ -6,13 +6,13 @@ public class switchPanel : MonoBehaviour {
     public GameObject mainPanel;
     public GameObject toolsPanel;
     public GameObject settingPanel;
-   
-
-    void OnTriggerExit(Collider other)
-    {   
-
-        mainPanel.SetActive(false);
-        toolsPanel.SetActive(true);
-        
+  
+     void OnTriggerExit(Collider other)
+    {
+        if (other.transform.gameObject.name == "hands:b_r_index2")
+        {
+            mainPanel.SetActive(false);
+            toolsPanel.SetActive(true);
+        }
     }
 }

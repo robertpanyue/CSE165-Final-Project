@@ -6,7 +6,11 @@ public class QuitGameUI : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        if (other.transform.gameObject.name == "hands:b_r_index2")
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
+        }
+        
     }
 }

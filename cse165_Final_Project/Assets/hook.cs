@@ -5,9 +5,7 @@ using UnityEngine;
 public class hook : MonoBehaviour {
 
     // ray
-    public GameObject user;
     public GameObject laser;
-    public GameObject test;
     private LineRenderer line;
     private GameObject selectedBox;
     public GameObject lefthand;
@@ -17,16 +15,20 @@ public class hook : MonoBehaviour {
     private float currHandPosition;
     // Use this for initialization
     void Start () {
+        
         laser.transform.position = transform.position;
         line = laser.GetComponent<LineRenderer>();
         line.startWidth = 0.05f;
         line.endWidth = 0.05f;
         preHandPosition = 0.0f;
+        hooked = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        laser.SetActive(true);
+        Debug.Log("hook update");
         if (!hooked)
         {
             line.SetPosition(0, transform.position);
@@ -38,12 +40,13 @@ public class hook : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                Debug.Log(hit.collider.tag);
-                if (hit.collider.tag == "box" || hit.collider.tag == "cow")
+                //Debug.Log(hit.collider.tag);
+                if (hit.collider.tag == "box" || hit.collider.tag == "cow" || hit.collider.tag == "car" || hit.collider.tag == "canbox" || hit.collider.tag == "shop"
+                    || hit.collider.tag == "table" || hit.collider.tag == "clock" || hit.collider.tag == "d" || hit.collider.tag == "music" || hit.collider.tag == "hat")
                 {
                     Debug.Log("hooooooooooooooooooooooooooooooooooooooooooooook");
                     Debug.Log(OVRInput.Get(OVRInput.RawButton.RThumbstick));
-                    if (OVRInput.Get(OVRInput.RawButton.RThumbstick))
+                    if (OVRInput.GetUp(OVRInput.RawButton.RThumbstick))
                     {
                         line.SetPosition(0, transform.position);
                         line.SetPosition(1, transform.position + transform.forward * 10);
@@ -56,8 +59,9 @@ public class hook : MonoBehaviour {
         else
         {
            
-            if (OVRInput.Get(OVRInput.RawButton.RHandTrigger) || OVRInput.Get(OVRInput.RawButton.LHandTrigger) || OVRInput.Get(OVRInput.RawButton.LThumbstick))
+            if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger) || OVRInput.Get(OVRInput.RawButton.RHandTrigger))
             {
+                float distance = Vector2.Distance(selectedBox.transform.position, transform.position);
                 currHandPosition = lefthand.transform.position.z;
                 float diff = 0;
                 if (preHandPosition == 0)
@@ -69,15 +73,18 @@ public class hook : MonoBehaviour {
                     diff = currHandPosition - preHandPosition;
                     preHandPosition = currHandPosition;
                 }
-                if (diff < 0)
+                if (diff < 0 && distance > 5.5)
                 {
                     selectedBox.transform.Translate(-diff*10, 0, 0);
                 }
-                Debug.Log(diff);
             }
-            else if (OVRInput.GetUp(OVRInput.RawButton.LThumbstick))
+            if (OVRInput.GetUp(OVRInput.RawButton.RThumbstick))
             {
-                
+                Debug.Log("cancel hook");
+                hooked = false;
+                laser.SetActive(false);
+                GameObject.Find("RightHandAnchor").GetComponent<hook>().enabled = false;
+                GameObject.Find("player").GetComponent<movement>().setJumpMode(true);
             }
         }
     }
