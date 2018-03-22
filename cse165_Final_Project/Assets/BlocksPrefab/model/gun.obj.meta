@@ -14,6 +14,7 @@ ModelImporter:
     2100004: lambert4SG
     2100006: lambert5SG
     2100008: initialShadingGroup
+    2100010: defaultMat
     2300000: default
     3300000: default
     4300000: default

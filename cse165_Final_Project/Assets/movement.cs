@@ -46,6 +46,8 @@ public class movement : MonoBehaviour
     public GameObject mainMenu;
     public GameObject handMenu;
     public GameObject grabber;
+
+    public GameObject gun;
     // Use this for initialization
     void Start()
     {
@@ -64,6 +66,15 @@ public class movement : MonoBehaviour
 
     }
 
+    public GameObject getCurrBox()
+    {
+        return currBlock;
+    }
+
+    public GameObject getNextBox()
+    {
+        return nextBlock;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -137,7 +148,20 @@ public class movement : MonoBehaviour
             }
             */
             
+            if (gun.GetComponent<shot>().getDestroy())
+            {
+                score = int.Parse(scorePanel1.GetComponent<Text>().text);
+                score += 10;
+                scorePanel1.GetComponent<Text>().text = score.ToString();
 
+                if (currBlock != null)
+                {
+
+                    SpawnBlock();
+                    spawn = false;
+                    gun.GetComponent<shot>().setDestroy(false);
+                }
+            }
         }
 
 
@@ -198,7 +222,7 @@ public class movement : MonoBehaviour
         }
     }
     */
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    public void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.transform.tag == "ground")
         {
