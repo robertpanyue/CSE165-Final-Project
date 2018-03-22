@@ -48,6 +48,11 @@ public class movement : MonoBehaviour
     public GameObject grabber;
 
     public GameObject gun;
+
+    public AudioSource playerSource;
+    public AudioClip jumpSound;
+    public AudioClip dead;
+    public AudioClip land;
     // Use this for initialization
     void Start()
     {
@@ -79,6 +84,7 @@ public class movement : MonoBehaviour
     void Update()
     {
 
+        Debug.Log(jumpMode);
         
 
         if (jumpMode)
@@ -90,8 +96,11 @@ public class movement : MonoBehaviour
                 {
                     preHandPosition = new Vector3(Mathf.Min(leftHand.transform.position.x, rightHand.transform.position.x), Mathf.Min(leftHand.transform.position.y, rightHand.transform.position.y), Mathf.Min(leftHand.transform.position.z, rightHand.transform.position.z));
                     Debug.Log("Down");
+                    playerSource.clip = jumpSound;
+                    playerSource.Play();
 
                 }
+                
                 verticalVelocity = -gravity * Time.deltaTime;
                 xdiff = 0;
                 zdiff = 0;
@@ -108,6 +117,7 @@ public class movement : MonoBehaviour
                     Debug.Log("Up");
                     spawn = true;
                     count = 1;
+                    playerSource.Pause();
                 }
             }
             else
@@ -136,18 +146,7 @@ public class movement : MonoBehaviour
             }
 
             count++;
-        }
-        else
-        {
-            OVRGrabbable grabble = grabber.GetComponent<OVRGrabber>().grabbedObject;
 
-            /*
-            if (grabble != null)
-            {
-                grabble.transform.GetComponent<Rigidbody>().useGravity = true;
-            }
-            */
-            
             if (gun.GetComponent<shot>().getDestroy())
             {
                 score = int.Parse(scorePanel1.GetComponent<Text>().text);
@@ -162,6 +161,19 @@ public class movement : MonoBehaviour
                     gun.GetComponent<shot>().setDestroy(false);
                 }
             }
+        }
+        else
+        {
+            OVRGrabbable grabble = grabber.GetComponent<OVRGrabber>().grabbedObject;
+
+            /*
+            if (grabble != null)
+            {
+                grabble.transform.GetComponent<Rigidbody>().useGravity = true;
+            }
+            */
+            
+
         }
 
 
@@ -224,34 +236,43 @@ public class movement : MonoBehaviour
     */
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.transform.tag == "ground")
+        float time = 0; 
+        while (hit.transform.tag == "ground")
         {
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            time++;
+            playerSource.clip = dead;
+            playerSource.Play();
+            if (time >= 2)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                break;
+            }
         }
 
 
-        
-
-
-        if (hit.transform.name != currBlock.transform.name)
+        if (hit.transform.name != currBlock.transform.name && hit.transform.tag != "soda")
         {
             score = int.Parse(scorePanel1.GetComponent<Text>().text);
             score += 10;
             scorePanel1.GetComponent<Text>().text = score.ToString();
+
+            playerSource.clip = land;
+            playerSource.Play();
 
             if (currBlock != null)
             {
 
                 Destroy(currBlock);
                 currBlock = nextBlock;
+                currBlock.GetComponent<AudioSource>().enabled = false;
                 spawn = true;
                 count = 1;
                 
             }
 
 
-            if (hit.transform.name == "shop(Clone)")
+            if (hit.transform.tag == "shop")
             {
                 handMenu.SetActive(true);
                 mainMenu.SetActive(false);

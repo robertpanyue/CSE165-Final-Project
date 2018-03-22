@@ -21,8 +21,10 @@ public class Ball : MonoBehaviour {
                 number--;
                 ballnumber.GetComponent<Text>().text = number.ToString();
                 HandMenu.SetActive(false);
+                GameObject.Find("player").GetComponent<movement>().setJumpMode(false);
             }
-
         }
+
+        
     }
 }

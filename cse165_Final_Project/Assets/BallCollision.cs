@@ -14,8 +14,9 @@ public class BallCollision : MonoBehaviour {
 	void Update () {
 
         float dis = Vector3.Distance(Player.transform.position, transform.position);
-	    if (dis > 0) {
-            Player.GetComponent<movement>().setJumpMode(true);  
+	    if (dis > 6) {
+            Player.GetComponent<movement>().setJumpMode(true);
+            Destroy(this);
         }
         Debug.Log(dis);
 	}
